@@ -16,7 +16,7 @@
 <body style="background-color:#ffbd59;">
     <script src="asset/js/nav.js"></script>
     <div id='card_container'></div>
-    <div class = 'carousel_slide_container' style="background-color: #FFF; z-index: 1;">
+    <div class='carousel_slide_container' style="background-color: #FFF; z-index: 1;">
         <hr class="hr-edge-weak" style="margin-top: 0;">
         <div class="big_text title" style="padding: 2%; color: #284b75;"><span class="underline">&nbsp&nbsp近期活動&nbsp&nbsp</span></div>
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
@@ -36,33 +36,35 @@
             </button>
           </div>
     </div>
-    <div style="width: 100%; height: 200%; background-color: #ffbd59">
-        <div class="big_text title" style="padding: 2%; color: #284b75;"><span class="underline">&nbsp&nbsp【為甚麼要選擇C.I.A?】&nbsp&nbsp</span></div>
-        <div class = "which_why">
+    <div style="max-height: 100%; background-color: #FFF">
+        <div class="big_text title" style="padding: 2%; color: #000;">C.I.A - Company In Air 最好的一站式升學探索平台</div>
+        <div class='video_box'>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/PaDSmCmXmmc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div style="height: 70%; background-color: #ffbd59">
+        <div class = "which_why" style="margin: 3%;">
             <div class = "why">
-                <div class="img_step_div"><img class="img_step" src="asset/img/home/why1.png"></div>
+                <div class="img_why_div"><img class="img_why" src="asset/img/home/why12.png"></div>
                 <div class="step_text">
-                    <div style="color: #f88411; font-size: 1.8vw; font-weight: 900; ">一站式升學輔導平台</div>
-                    <div class="left_text" style="color: #284b75; font-weight: 900; font-size: 1.4vw; padding-top: 2%;">C.I.A團隊將探索到升學途中的各種需求進行整合，打造由線上營隊與個人諮詢構建出的一站式線上平台，不只解決對未來科系的疑惑，也幫助同學考上自己的目標校系。</div>
+                    <div style="color: #f88411; font-size: 1.8vw; font-weight: 900;">一站式升學輔導平台</div>
+                    <div class="left_text" style="color: #284b75; font-weight: 900; font-size: 1.4vw;">C.I.A團隊將探索到升學途中的各種需求進行整合，打造由線上營隊與個人諮詢構建出的一站式線上平台，不只解決對未來科系的疑惑，也幫助同學考上自己的目標校系。</div>
                 </div>
             </div>
             <div class = "why">
-                <div class="img_step_div"><img class="img_step" src="asset/img/home/why2.png"></div>
+                <div class="img_why_div"><img class="img_why" src="asset/img/home/why22.png"></div>
                 <div class="step_text">
                     <div style="color: #f88411; font-size: 1.8vw; font-weight: 900;">實際與大學師生交流</div>
-                    <div class="left_text" style="color: #284b75; font-weight: 900; font-size: 1.4vw; padding-top: 2%;">C.I.A團隊找到來自各大名校不同科系的學長姐與教授，線上面對面直接分享大學科系的制度、實際體驗及未來出路，讓同學能在高中階段盡早確定目標，全心衝刺。</div>
+                    <div class="left_text" style="color: #284b75; font-weight: 900; font-size: 1.4vw;">C.I.A團隊找到來自各大名校不同科系的學長姐與教授，線上面對面直接分享大學科系的制度、實際體驗及未來出路，讓同學能在高中階段盡早確定目標，全心衝刺。</div>
                 </div>
             </div>
             <div class = "why">
-                <div class="img_step_div"><img class="img_step" src="asset/img/home/why3.png"></div>
+                <div class="img_why_div"><img class="img_why" src="asset/img/home/why32.png"></div>
                 <div class="step_text">
                     <div style="color: #f88411; font-size: 1.8vw; font-weight: 900;">創新式科系探索活動</div>
-                    <div class="left_text" style="color: #284b75; font-weight: 900; font-size: 1.4vw; padding-top: 2%;">融合新潮線上數位工具，C.I.A團隊設計各種科系線上實作、闖關活動和基礎課程，也不斷通過創新，研發出更有效的線上科系探索模式，讓探索途中充滿歡笑及樂趣。</div>
+                    <div class="left_text" style="color: #284b75; font-weight: 900; font-size: 1.4vw;">融合新潮線上數位工具，C.I.A團隊設計各種科系線上實作、闖關活動和基礎課程，也不斷通過創新，研發出更有效的線上科系探索模式，讓探索途中充滿歡笑及樂趣。</div>
                 </div>
             </div>
-        </div>
-        <div class='video_box'>
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/xcanwdpHvVs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
     <div class="container_whole_which_provide" style="background-color:#FFF; padding-bottom: 2%;">
@@ -197,6 +199,11 @@ body, html{
     height: 100%;
 }
 
+.nav-link:hover {
+    color: #ffbd59;
+    /*#005AB5*/
+}
+
 .sticky {
   position: fixed;
   top: 0;
@@ -271,16 +278,17 @@ img{
 
 /*=======翻轉字卡=======*/
 #card_container{
-    width: 100%;
-    height: 77%;
+    height: 40vw;
+    max-height: 77%;
     background-color: #ffbd59;
 }
 
 .card_container{
     width: 4.5%;
-    height: 18%;
+    height: 6vw;
+    max-height: 6vw;
     background-color: white;
-    top: 15%;
+    top: 5.2vw;
     position: relative;
 }
 
@@ -358,15 +366,14 @@ img{
 
 .which_why{
     display: grid;
-    grid-template-columns: 0.5fr 0.5fr 0.5fr;
-    padding: 2% 3%;
-    margin: 0% 5%;
-    margin-bottom: 2%;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 0% 8%;
 }
 
 .why {
     background-color: white;
-    height: 100%;
+    /* max-height: 75%; */
+    height: 75%;
     margin: 0% 4%;
     transition: 0.3s ease-in-out;
 }
@@ -425,6 +432,26 @@ img{
     color:#284b75;
     background-color:#ffbd59;
     border:2px #ffbd59 solid;
+}
+
+.img_why {
+    float: center;
+    max-height: 80%;  
+    max-width: 80%; 
+    width: auto;
+    height: auto;
+    object-fit:cover;
+    margin: 5%;
+}
+
+.img_why_div {
+    overflow: hidden;
+    float: center;
+    height: 30%;
+    width: 100%;
+    margin-top: 3%;
+    margin-bottom: 5%;
+
 }
 
 .img_step {

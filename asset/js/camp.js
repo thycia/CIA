@@ -42,15 +42,6 @@ for(let i = 0; i < n_camp; i++){
   image.push([info_array1[i][1]]);
 }
 
-
-const test =[[0], [1]];
-console.log(price);
-console.log(test);
-console.log(info_array1);
-
-
-
-
 var slider = document.createElement('div');
 slider.setAttribute('class', 'slider');
 slider.style.width = '70%';
@@ -80,15 +71,18 @@ for(let i = 0; i<n_camp; i++){
   info_span.style.opacity = '0.95';
   info_span.style.left = 0;
   info_span.style.padding = '2%';
+  info_span.style.fontSize = '1.3vw';
   info_span.innerHTML = info[i];
   var img = document.createElement('img');
   img.src = image[i];
   var text_div = document.createElement('div');
   text_div.innerHTML = text[i];
   text_div.style.color = '#284b75';
+  text_div.style.fontSize = '1.5vw';
   var price_div = document.createElement('div');
   price_div.innerHTML = "NT$"+price[i];
   price_div.style.color = '#284b75';
+  price_div.style.fontSize = '1.5vw';
   img_div.appendChild(info_span);
   img_div.appendChild(img); 
   container_div2.appendChild(img_div);
@@ -122,7 +116,7 @@ $('.slider').slick({
     swipeToSlide: true,
     slidesToScroll: 1,
     infinite: true,
-    arrows: false,
+    arrows: true,
 });
 
 
@@ -136,13 +130,25 @@ slider_video.style.width = '72%';
 slider_video.style.height = '90%';
 video_container.appendChild(slider_video);
 
+
+
+viedo_link = [
+  ["https://www.youtube.com/embed/O1XBJXBOVyc"],
+  ["https://www.youtube.com/embed/23U_q7FNtVs"],
+];
 for(let i = 0; i<2; i++){
-  var video = document.createElement('video');
-  video.setAttribute('controls', true);
-  var source = document.createElement('source');
-  source.src = 'asset/video/video' + (i+1) + '.mp4';
-  video.appendChild(source);
-  slider_video.appendChild(video);
+  var div = document.createElement('div');
+  div.setAttribute('class', 'video_box');
+  var iframe = document.createElement('iframe');
+  iframe.style.width = '560';
+  iframe.style.height = '315';
+  iframe.title = 'YouTube video player';
+  iframe.frameborder = "0";
+  iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+  iframe.allowFullscreen = true; 
+  iframe.src = viedo_link[i];
+  div.appendChild(iframe);
+  slider_video.appendChild(div);
 }
 
   /* 影片跑馬燈設定 */
@@ -302,20 +308,29 @@ function voted_page(){
           pools.doc(id).update({
             voted: voted_array[i][2] + 1,
           })
-        console.log("update succeed!");
       }
 
       var comment = checkans.value;
       if(comment != "") {
         if(comment.includes("系", 2)){
           var pools_comment = db.collection('pools_comment');
-          pools_comment.add({
-              comment: comment
+          var number = 1;
+          pools_comment.get().then(querySnapshot => {
+            querySnapshot.forEach(doc => {
+              if(doc.id == comment)
+                number = doc.data().num + 1;
+            });
+          });
+
+          setTimeout(function(){
+            pools_comment.doc(comment).set({
+              num: number+0
             });
             modal.style.display = "none";
             setTimeout(function(){
               window.location.reload();
             }, 500);
+          }, 500);
         }
         else
           hint.style.visibility = 'visible';
@@ -328,6 +343,7 @@ function voted_page(){
     container_voted_send.appendChild(button);
     container_voted_page.appendChild(container_voted_send); 
     container_voted_page.appendChild(hint);
+    console.log("update succeed!");
   }
 flag = false;
 }
@@ -346,10 +362,9 @@ $(window).scroll(function(){
 
   try{
     var voted_bar = document.getElementsByClassName('voted_bar');
-    var voted_number = document.getElementsByClassName('voted_number');
     var container_pool_offsetTop = container_pool.offsetTop;
     for(let i = 0; i<3; i++){
-      if (window.pageYOffset >= container_pool_offsetTop - 600)
+      if (window.pageYOffset >= container_pool_offsetTop - 850)
         voted_bar[i].style.animationPlayState = 'running';
       else
         voted_bar[i].style.animationPlayState = 'paused';
@@ -359,5 +374,3 @@ $(window).scroll(function(){
   }
 });
 });
-
-
