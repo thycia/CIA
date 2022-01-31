@@ -17,7 +17,7 @@ console.log(filesname);
 //                 window.location.href = filesname + "_mobile.html";
 //             }
 
-if (window.screen.height > window.screen.width)
+if (window.screen.height < window.screen.width)
 {
-    window.location = filesname + "_mobile.html";
+    window.location = filesname + "_pc.html";
 }
