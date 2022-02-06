@@ -129,8 +129,8 @@ video_container.style.marginBottom = '3%';
 video_container.style.paddingBottom = '5%';
 var slider_video = document.createElement('div');
 slider_video.setAttribute('class', 'slider_video');
-slider_video.style.width = '72%';
-slider_video.style.height = '90%';
+slider_video.style.width = '80%';
+slider_video.style.height = '100%';
 video_container.appendChild(slider_video);
 
 
@@ -142,9 +142,13 @@ viedo_link = [
 for(let i = 0; i<2; i++){
   var div = document.createElement('div');
   div.setAttribute('class', 'video_box');
+  div.style.height = '90%';
+  div.style.width = '90%';
   var iframe = document.createElement('iframe');
   iframe.style.width = '560';
   iframe.style.height = '315';
+  iframe.style.height = '90%';
+  iframe.style.width = '90%';
   iframe.title = 'YouTube video player';
   iframe.frameborder = "0";
   iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
@@ -182,16 +186,19 @@ for(let i = 0; i<3; i++){
   var div = document.createElement('div');
   div.setAttribute('class', 'department_item');
   div.style.padding = '2%';
+  div.style.margin = '2% 0%';
   div.style.width = '100%';
   div.style.display = 'flex';
   var voted_img = document.createElement('img');
   voted_img.src = 'asset/img/camp/prize_0' + (i+1) + '.png';
   voted_img.style.justifyContent = 'flex-start';
-  voted_img.style.width = '4%';
+  voted_img.style.width = '6%';
   voted_img.style.marginTop = '-1.5%';
   var voted_name = document.createElement('div');
   voted_name.style.justifyContent = 'flex-start';
   voted_name.style.padding = '0% 2%';
+  voted_name.style.fontSize = '4vw';
+  voted_name.style.width = '20%';
   voted_name.innerText = voted_array[i][1];
   var voted_bar_box = document.createElement('div');
   voted_bar_box.setAttribute('class','department_bar_box');
@@ -218,6 +225,7 @@ for(let i = 0; i<3; i++){
   voted_number.style.justifyContent = 'flex-end';
   voted_number.style.marginLeft = '2%';
   voted_number.style.padding = '0% 2%';
+  voted_number.style.fontSize = '4vw';
   voted_number.innerText = voted_array[i][2];
   div.appendChild(voted_img);
   div.appendChild(voted_name);
@@ -315,15 +323,16 @@ function voted_page(){
     container_voted_send.display = 'inline';
     var button = document.createElement('button');
     button.style.float = 'right';
-    if (/mobile/i.test(navigator.userAgent)) {
-      button.style.width = '15%';
-      button.style.marginTop = '-10%';
-      button.style.marginRight = '1%';
-    }
-    else{
+    if (window.screen.height < window.screen.width) {
       button.style.width = '10%';
       button.style.marginTop = '-5.5%';
       button.style.marginRight = '2%';
+    }
+    else{
+      button.style.width = '15%';
+      button.style.marginTop = '-3vh';
+      button.style.marginRight = '1%';
+
     }
     button.innerHTML = '送出';
     button.addEventListener('click', function(){
