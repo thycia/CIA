@@ -11,7 +11,8 @@ const firebaseConfig = {
 const app = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
-
+const is_PC = window.screen.height < window.screen.width;;
+const window_top = $(window).height();
 const the_card_container = document.getElementById('card_container');
 var count_for_card_text = 1;
 var count_for_card_cover_and_back = 0;
@@ -219,16 +220,87 @@ for(let i = 0; i<recent_activities_array.length; i++){
 //     </div>
 // </div>
 
+if(is_PC){
+  $(".step_text").hover(function(){
+    $(this).find(".step_before_text").stop().fadeOut(1000);
+    var obj = $(this).find(".step_before_text").parent().find('button');
+    obj.css({'margin-top':"5%","margin-bottom":'0%','opacity':'0'});
+    window.setTimeout(function(){
+      obj.animate({
+        marginTop: '0%',
+        marginBottom: '5%',
+        opacity: '1',
+      }, 1000, 'swing', obj);
+    }, 200);
+  }, function(){
+    $(this).find(".step_before_text").stop().fadeIn(1000);
+  });
+}
+else{
+  // flow control ( undo :( )
+  $(window).bind('scroll resize', function(){
+    var obj = $(".step_after_title_text").parent().find('button');
+    for(let i = 0; i<obj.length; i++){
+      var obj_center = ($(obj[i]).offset().top * 2 + parseInt($(obj[i]).css('height')))/2;
+      if(obj_center <= $(window).height() + $(document).scrollTop() ){
+        $(obj[i]).css({'margin-top':"5%","margin-bottom":'0%','opacity':'0'});
+        window.setTimeout(function(){
+          $(obj[i]).animate({
+            marginTop: '0%',
+            marginBottom: '5%',
+            opacity: '1',
+          }, 1000, 'swing', $(obj[i]));
+        }, 200);
+      }
+    }
+  });
+}
 
-$(".step_text").hover(function(){
-  $(this).find(".step_before_text").stop().fadeOut(1000);
-}, function(){
-  $(this).find(".step_before_text").stop().fadeIn(1000);
-});
 
 
 $(".container_which_provide").hover(function(){
   $(this).find(".which_provide_before").stop().fadeOut(1000);
 }, function(){
   $(this).find(".which_provide_before").stop().fadeIn(1000);
+});
+
+$('.why').hover(function(){
+  $(this).find('.img_why').css({"transform":"rotate(-45deg)", "transition":"1s" });
+}, function(){
+  $(this).find('.img_why').css({"transform":"rotate(0deg)", "transition":"1s" });
+});
+
+var scroll_flag_why = [true, true, true];
+var why_list = document.getElementsByClassName('why');
+for(let i = 0;i<why_list.length; i++){
+  if(is_PC)  
+    $(why_list[i]).css({'margin-bottom':'-8%','opacity':'0'});
+  else{
+    $(why_list[i]).css({'margin-bottom':'0%','margin-top':'0%'});
+    $('.which_why').css({'margin-bottom':'8%','margin-top':'8%'});
+    if(i == 2)
+      $($('.why')[i]).css({'margin-bottom':'0%', 'padding-bottom':'0%'});
+    else
+      $($('.why')[i]).css({'margin-bottom':'5%', 'padding-bottom':'0%'});
+    console.log($('.why')[i]);
+  }
+}
+
+$(window).bind('scroll resize', function(){
+  for(let i = 0; i<why_list.length; i++){
+    var why_top = $(why_list[i]).offset().top;
+    var why_bottom = $(why_list[i]).offset().top + parseInt($('.step').css('height'))
+    if((why_top <= window_top + $(document).scrollTop() && why_bottom + window_top >= window_top + $(document).scrollTop()) && scroll_flag_why[i]){
+      if(is_PC)  
+        $(why_list[i]).animate({opacity: '1', marginTop: '-4%', marginBottom: '-4%'}, 1000, 'swing');
+      else{
+        $(why_list[i]).children('.white_mask').animate({height: 'toggle', marginTop: '100%'}, 1000, 'swing');
+        // $(why_list[i]).animate({marginTop: '5%', marginBottom: '5%'}, 1000, 'swing');
+        window.setTimeout(function(){
+          $($('.why')[i]).animate({paddingBottom: '5%'}, 1000, 'swing');
+        }, 100)
+      }
+        scroll_flag_why[i] = false;
+    }
+  }
 });
