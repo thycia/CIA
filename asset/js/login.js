@@ -122,44 +122,49 @@ google.addEventListener('click', () => {
         let credential = error.credential;
       });
 
-  // if(nameG == null)
-  //     nameG = "";
-  // if(emailG == null)
-  //     emailG = "";
-  // if(phoneG == null)
-  //     phoneG = "";
+  if(nameG == null)
+      nameG = "";
+  if(emailG == null)
+      emailG = "";
+  if(phoneG == null)
+      phoneG = "";
 
-  // sessionStorage.setItem('name', nameG);
+  sessionStorage.setItem('name', nameG);
+  sessionStorage.setItem('status', 'login');
 
-  // var userDB = db.collection('user');
-  // var flag = 0;
+  var userDB = db.collection('user');
+  var flag = 0;
 
-  // userDB.get().then(querySnapshot => {
-  //   querySnapshot.forEach(doc => {
-  //     if(doc.id == idG)
-  //     {
-  //       flag = 1;
-  //     }
-  //   });
-  // });
+  userDB.get().then(querySnapshot => {
+    querySnapshot.forEach(doc => {
+      if(doc.id == idG)
+      {
+        flag = 1;
+      }
+    });
+  });
 
-  // setTimeout(function(){
-  //   if(flag == 0)
-  //   {
-  //     userDB.doc(idG).set({
-  //       name: nameG,
-  //       school: "",
-  //       grade: "",
-  //       email: emailG,
-  //       phone: phoneG,
-  //       parent: "",
-  //       relation: "",
-  //       parent_phone: "",
-  //       username: "",
-  //       password: ""
-  //     });
-  //   }
-  // }, 500);
+  setTimeout(function(){
+    if(flag == 0)
+    {
+      userDB.doc(idG).set({
+        name: nameG,
+        school: "",
+        grade: "",
+        email: emailG,
+        phone: phoneG,
+        parent: "",
+        relation: "",
+        parent_phone: "",
+        username: "",
+        password: ""
+      });
+    }
+
+    setTimeout(function(){
+      
+    }, 500);
+  }, 500);
 
 });
 
