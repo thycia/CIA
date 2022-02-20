@@ -114,68 +114,7 @@ google.addEventListener('click', () => {
         emailG = user.email;
         phoneG = user.phoneNumber;
         idG = user.uid;
-      }).catch((error) => {
-        let errorCode = error.code;
-        let errorMessage = error.message;
-        let email = error.email;
-        let credential = error.credential;
-      });
-
-  if(nameG == null)
-      nameG = "";
-  if(emailG == null)
-      emailG = "";
-  if(phoneG == null)
-      phoneG = "";
-
-  sessionStorage.setItem('name', nameG);
-
-  var userDB = db.collection('user');
-  var flag = 0;
-
-  userDB.get().then(querySnapshot => {
-    querySnapshot.forEach(doc => {
-      if(doc.id == idG)
-      {
-        flag = 1;
-      }
-    });
-  });
-
-  setTimeout(function(){
-    if(flag == 0)
-    {
-      userDB.doc(idG).set({
-        name: nameG,
-        school: "",
-        grade: "",
-        email: emailG,
-        phone: phoneG,
-        parent: "",
-        relation: "",
-        parent_phone: "",
-        username: "",
-        password: ""
-      });
-    }
-  }, 500);
-
-});
-
-
-// Facebook 登入
-fb.addEventListener('click', () => {
-  
-  firebase.auth()
-      .signInWithPopup(providerFb)
-      .then((result) => {
-        let credential = result.credential;
-        let accessToken = credential.accessToken;
-        let user = result.user;
-        // nameG = user.displayName;
-        // emailG = user.email;
-        // phoneG = user.phoneNumber;
-        // idG = user.uid;
+        console.log('name', nameG, 'email', emailG, 'phone', phoneG, 'id', idG);
       }).catch((error) => {
         let errorCode = error.code;
         let errorMessage = error.message;
@@ -221,5 +160,68 @@ fb.addEventListener('click', () => {
   //     });
   //   }
   // }, 500);
+
+});
+
+
+// Facebook 登入
+fb.addEventListener('click', () => {
+  
+  firebase.auth()
+      .signInWithPopup(providerFb)
+      .then((result) => {
+        let credential = result.credential;
+        let accessToken = credential.accessToken;
+        let user = result.user;
+        nameG = user.displayName;
+        emailG = user.email;
+        phoneG = user.phoneNumber;
+        idG = user.uid;
+        console.log('FB:name', nameG, 'email', emailG, 'phone', phoneG, 'id', idG);
+      }).catch((error) => {
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        let email = error.email;
+        let credential = error.credential;
+      });
+
+  if(nameG == null)
+      nameG = "";
+  if(emailG == null)
+      emailG = "";
+  if(phoneG == null)
+      phoneG = "";
+
+  sessionStorage.setItem('name', nameG);
+
+  var userDB = db.collection('user');
+  var flag = 0;
+
+  userDB.get().then(querySnapshot => {
+    querySnapshot.forEach(doc => {
+      if(doc.id == idG)
+      {
+        flag = 1;
+      }
+    });
+  });
+
+  setTimeout(function(){
+    if(flag == 0)
+    {
+      userDB.doc(idG).set({
+        name: nameG,
+        school: "",
+        grade: "",
+        email: emailG,
+        phone: phoneG,
+        parent: "",
+        relation: "",
+        parent_phone: "",
+        username: "",
+        password: ""
+      });
+    }
+  }, 500);
 
 });
