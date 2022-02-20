@@ -93,10 +93,7 @@ const providerGoogle = new firebase.auth.GoogleAuthProvider();
 const google = document.getElementById('google');
 
 // Facebook
-// const providerFb = new firebase.auth.FacebookAuthProvider();
-
-import { FacebookAuthProvider } from "firebase/auth";
-const provider = new FacebookAuthProvider();
+const providerFb = new firebase.auth.FacebookAuthProvider();
 const fb = document.getElementById('fb');
 
 var nameG = "";
@@ -178,94 +175,69 @@ google.addEventListener('click', () => {
 
 // Facebook 登入
 fb.addEventListener('click', () => {
-
-  import { getAuth, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
-
-const auth = getAuth();
-signInWithPopup(auth, provider)
-  .then((result) => {
-    // The signed-in user info.
-    const user = result.user;
-
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    const credential = FacebookAuthProvider.credentialFromResult(result);
-    const accessToken = credential.accessToken;
-
-    // ...
-  })
-  .catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.email;
-    // The AuthCredential type that was used.
-    const credential = FacebookAuthProvider.credentialFromError(error);
-
-    // ...
-  });
   
   
-  // firebase.auth()
-  //     .signInWithPopup(providerFb)
-  //     .then((result) => {
-  //       let credential = result.credential;
-  //       let accessToken = credential.accessToken;
-  //       let user = result.user;
-        // nameG = user.displayName;
-        // emailG = user.email;
-        // phoneG = user.phoneNumber;
-        // idG = user.uid;
+  firebase.auth()
+      .signInWithPopup(providerFb)
+      .then((result) => {
+        let credential = result.credential;
+        let accessToken = credential.accessToken;
+        let user = result.user;
+        nameG = user.displayName;
+        emailG = user.email;
+        phoneG = user.phoneNumber;
+        idG = user.uid;
         
-        // if(nameG == null)
-        //     nameG = "";
-        // if(emailG == null)
-        //     emailG = "";
-        // if(phoneG == null)
-        //     phoneG = "";
+        if(nameG == null)
+            nameG = "";
+        if(emailG == null)
+            emailG = "";
+        if(phoneG == null)
+            phoneG = "";
 
-        // sessionStorage.setItem('name', nameG);
-        // sessionStorage.setItem('status', 'login');
-        // sessionStorage.setItem('id', idG);
+        sessionStorage.setItem('name', nameG);
+        sessionStorage.setItem('status', 'login');
+        sessionStorage.setItem('id', idG);
 
-        // var userDB = db.collection('user');
-        // var flag = 0;
+        var userDB = db.collection('user');
+        var flag = 0;
 
-        // userDB.get().then(querySnapshot => {
-        //   querySnapshot.forEach(doc => {
-        //     if(doc.id == idG)
-        //     {
-        //       flag = 1;
-        //     }
-        //   });
-        // });
+        userDB.get().then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            if(doc.id == idG)
+            {
+              flag = 1;
+            }
+          });
+        });
 
-        // setTimeout(function(){
-        //   if(flag == 0)
-        //   {
-        //     userDB.doc(idG).set({
-        //       name: nameG,
-        //       school: "",
-        //       grade: "",
-        //       email: emailG,
-        //       phone: phoneG,
-        //       parent: "",
-        //       relation: "",
-        //       parent_phone: "",
-        //       username: "",
-        //       password: ""
-        //     });
-        //   }
-
-        //   window.location = 'update.html';
+        setTimeout(function(){
+          if(flag == 0)
+          {
+            userDB.doc(idG).set({
+              name: nameG,
+              school: "",
+              grade: "",
+              email: emailG,
+              phone: phoneG,
+              parent: "",
+              relation: "",
+              parent_phone: "",
+              username: "",
+              password: ""
+            });
+            window.location = 'update.html';
+          }else{
+            window.location = 'index.html';
+          }
           
-      //   }, 500);
-      // }).catch((error) => {
-      //   let errorCode = error.code;
-      //   let errorMessage = error.message;
-      //   let email = error.email;
-      //   let credential = error.credential;
-      // });
+        }, 500);
+      }).catch((error) => {
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        let email = error.email;
+        let credential = error.credential;
+      });
 
   
 
