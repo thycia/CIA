@@ -134,6 +134,10 @@ google.addEventListener('click', () => {
             if(doc.id == idG)
             {
               flag = 1;
+              if(doc.data().grade == "")
+              {
+                flag = 2;
+              }
             }
           });
         });
@@ -165,6 +169,19 @@ google.addEventListener('click', () => {
               }
             })
             
+          }else if(flag == 2)
+          {
+            Swal.fire({
+              icon: 'success',
+              title: 'OK',
+              text: '請前往填寫基本資料',
+              allowOutsideClick: false,
+              showCancelButton: false,
+            }).then((result) => {
+              if (result.value) {
+                window.location = 'update.html';
+              }
+            })
           }else{
             window.location = 'index.html';
           }
@@ -218,6 +235,10 @@ fb.addEventListener('click', () => {
             if(doc.id == idG)
             {
               flag = 1;
+              if(doc.data().grade == "")
+              {
+                flag = 2;
+              }
             }
           });
         });
@@ -248,6 +269,19 @@ fb.addEventListener('click', () => {
                 window.location = 'update.html';
               }
             })
+          }else if(flag == 2)
+          {
+            Swal.fire({
+              icon: 'success',
+              title: 'OK',
+              text: '請前往填寫基本資料',
+              allowOutsideClick: false,
+              showCancelButton: false,
+            }).then((result) => {
+              if (result.value) {
+                window.location = 'update.html';
+              }
+            })
           }else{
             window.location = 'index.html';
           }
@@ -261,7 +295,7 @@ fb.addEventListener('click', () => {
         Swal.fire({
           icon: 'warning',
           title: 'Oops...',
-          text: '此信箱已使用FB登入過',
+          text: '此信箱已使用Google登入過',
           allowOutsideClick: false,
           showCancelButton: false,
           })
