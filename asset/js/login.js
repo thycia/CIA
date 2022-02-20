@@ -114,7 +114,7 @@ google.addEventListener('click', () => {
         emailG = user.email;
         phoneG = user.phoneNumber;
         idG = user.uid;
-        console.log('name', nameG, 'email', emailG, 'phone', phoneG, 'id', idG);
+
         if(nameG == null)
             nameG = "";
         if(emailG == null)
@@ -183,7 +183,50 @@ fb.addEventListener('click', () => {
         emailG = user.email;
         phoneG = user.phoneNumber;
         idG = user.uid;
-        console.log('FB:name', nameG, 'email', emailG, 'phone', phoneG, 'id', idG);
+        
+        if(nameG == null)
+            nameG = "";
+        if(emailG == null)
+            emailG = "";
+        if(phoneG == null)
+            phoneG = "";
+
+        sessionStorage.setItem('name', nameG);
+        sessionStorage.setItem('status', 'login');
+        sessionStorage.setItem('id', idG);
+
+        var userDB = db.collection('user');
+        var flag = 0;
+
+        userDB.get().then(querySnapshot => {
+          querySnapshot.forEach(doc => {
+            if(doc.id == idG)
+            {
+              flag = 1;
+            }
+          });
+        });
+
+        setTimeout(function(){
+          if(flag == 0)
+          {
+            userDB.doc(idG).set({
+              name: nameG,
+              school: "",
+              grade: "",
+              email: emailG,
+              phone: phoneG,
+              parent: "",
+              relation: "",
+              parent_phone: "",
+              username: "",
+              password: ""
+            });
+          }
+
+          window.location = 'update.html';
+          
+        }, 500);
       }).catch((error) => {
         let errorCode = error.code;
         let errorMessage = error.message;
@@ -191,45 +234,6 @@ fb.addEventListener('click', () => {
         let credential = error.credential;
       });
 
-  if(nameG == null)
-      nameG = "";
-  if(emailG == null)
-      emailG = "";
-  if(phoneG == null)
-      phoneG = "";
-
-  sessionStorage.setItem('name', nameG);
-  sessionStorage.setItem('status', 'login');
-  sessionStorage.setItem('id', idG);
-
-  var userDB = db.collection('user');
-  var flag = 0;
-
-  userDB.get().then(querySnapshot => {
-    querySnapshot.forEach(doc => {
-      if(doc.id == idG)
-      {
-        flag = 1;
-      }
-    });
-  });
-
-  setTimeout(function(){
-    if(flag == 0)
-    {
-      userDB.doc(idG).set({
-        name: nameG,
-        school: "",
-        grade: "",
-        email: emailG,
-        phone: phoneG,
-        parent: "",
-        relation: "",
-        parent_phone: "",
-        username: "",
-        password: ""
-      });
-    }
-  }, 500);
+  
 
 });
