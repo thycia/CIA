@@ -292,13 +292,16 @@ fb.addEventListener('click', () => {
         let errorMessage = error.message;
         let email = error.email;
         let credential = error.credential;
-        Swal.fire({
-          icon: 'warning',
-          title: 'Oops...',
-          text: errorMessage,
-          allowOutsideClick: false,
-          showCancelButton: false,
-          })
+        if(errorMessage.includes("exists"))
+        {
+          Swal.fire({
+            icon: 'warning',
+            title: 'Oops...',
+            text: '此信箱已使用google登入',
+            allowOutsideClick: false,
+            showCancelButton: false,
+            })
+        }
       });
 
   
