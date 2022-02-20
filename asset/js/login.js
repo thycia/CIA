@@ -179,54 +179,54 @@ fb.addEventListener('click', () => {
         let credential = result.credential;
         let accessToken = credential.accessToken;
         let user = result.user;
-        nameG = user.displayName;
-        emailG = user.email;
-        phoneG = user.phoneNumber;
-        idG = user.uid;
+        // nameG = user.displayName;
+        // emailG = user.email;
+        // phoneG = user.phoneNumber;
+        // idG = user.uid;
         
-        if(nameG == null)
-            nameG = "";
-        if(emailG == null)
-            emailG = "";
-        if(phoneG == null)
-            phoneG = "";
+        // if(nameG == null)
+        //     nameG = "";
+        // if(emailG == null)
+        //     emailG = "";
+        // if(phoneG == null)
+        //     phoneG = "";
 
-        sessionStorage.setItem('name', nameG);
-        sessionStorage.setItem('status', 'login');
-        sessionStorage.setItem('id', idG);
+        // sessionStorage.setItem('name', nameG);
+        // sessionStorage.setItem('status', 'login');
+        // sessionStorage.setItem('id', idG);
 
-        var userDB = db.collection('user');
-        var flag = 0;
+        // var userDB = db.collection('user');
+        // var flag = 0;
 
-        userDB.get().then(querySnapshot => {
-          querySnapshot.forEach(doc => {
-            if(doc.id == idG)
-            {
-              flag = 1;
-            }
-          });
-        });
+        // userDB.get().then(querySnapshot => {
+        //   querySnapshot.forEach(doc => {
+        //     if(doc.id == idG)
+        //     {
+        //       flag = 1;
+        //     }
+        //   });
+        // });
 
-        setTimeout(function(){
-          if(flag == 0)
-          {
-            userDB.doc(idG).set({
-              name: nameG,
-              school: "",
-              grade: "",
-              email: emailG,
-              phone: phoneG,
-              parent: "",
-              relation: "",
-              parent_phone: "",
-              username: "",
-              password: ""
-            });
-          }
+        // setTimeout(function(){
+        //   if(flag == 0)
+        //   {
+        //     userDB.doc(idG).set({
+        //       name: nameG,
+        //       school: "",
+        //       grade: "",
+        //       email: emailG,
+        //       phone: phoneG,
+        //       parent: "",
+        //       relation: "",
+        //       parent_phone: "",
+        //       username: "",
+        //       password: ""
+        //     });
+        //   }
 
-          window.location = 'update.html';
+        //   window.location = 'update.html';
           
-        }, 500);
+        // }, 500);
       }).catch((error) => {
         let errorCode = error.code;
         let errorMessage = error.message;
