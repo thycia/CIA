@@ -172,13 +172,28 @@ google.addEventListener('click', () => {
 
 // Facebook 登入
 fb.addEventListener('click', () => {
-  
-  firebase.auth()
+
+  firebase
+      .auth()
       .signInWithPopup(providerFb)
       .then((result) => {
         let credential = result.credential;
         let accessToken = credential.accessToken;
         let user = result.user;
+      })
+      .catch((error) => {
+        let errorCode = error.code;
+        let errorMessage = error.message;
+        let email = error.email;
+        let credential = error.credential;
+      });
+  
+  // firebase.auth()
+  //     .signInWithPopup(providerFb)
+  //     .then((result) => {
+  //       let credential = result.credential;
+  //       let accessToken = credential.accessToken;
+  //       let user = result.user;
         // nameG = user.displayName;
         // emailG = user.email;
         // phoneG = user.phoneNumber;
@@ -226,13 +241,13 @@ fb.addEventListener('click', () => {
 
         //   window.location = 'update.html';
           
-        // }, 500);
-      }).catch((error) => {
-        let errorCode = error.code;
-        let errorMessage = error.message;
-        let email = error.email;
-        let credential = error.credential;
-      });
+      //   }, 500);
+      // }).catch((error) => {
+      //   let errorCode = error.code;
+      //   let errorMessage = error.message;
+      //   let email = error.email;
+      //   let credential = error.credential;
+      // });
 
   
 
