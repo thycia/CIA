@@ -93,7 +93,10 @@ const providerGoogle = new firebase.auth.GoogleAuthProvider();
 const google = document.getElementById('google');
 
 // Facebook
-const providerFb = new firebase.auth.FacebookAuthProvider();
+// const providerFb = new firebase.auth.FacebookAuthProvider();
+
+import { FacebookAuthProvider } from "firebase/auth";
+const provider = new FacebookAuthProvider();
 const fb = document.getElementById('fb');
 
 var nameG = "";
@@ -153,9 +156,12 @@ google.addEventListener('click', () => {
               username: "",
               password: ""
             });
+            window.location = 'update.html';
+          }else{
+            window.location = 'index.html';
           }
 
-          window.location = 'update.html';
+          
           
         }, 500);
       }).catch((error) => {
@@ -173,20 +179,32 @@ google.addEventListener('click', () => {
 // Facebook 登入
 fb.addEventListener('click', () => {
 
-  firebase
-      .auth()
-      .signInWithPopup(providerFb)
-      .then((result) => {
-        let credential = result.credential;
-        let accessToken = credential.accessToken;
-        let user = result.user;
-      })
-      .catch((error) => {
-        let errorCode = error.code;
-        let errorMessage = error.message;
-        let email = error.email;
-        let credential = error.credential;
-      });
+  import { getAuth, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
+
+const auth = getAuth();
+signInWithPopup(auth, provider)
+  .then((result) => {
+    // The signed-in user info.
+    const user = result.user;
+
+    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    const credential = FacebookAuthProvider.credentialFromResult(result);
+    const accessToken = credential.accessToken;
+
+    // ...
+  })
+  .catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // The email of the user's account used.
+    const email = error.email;
+    // The AuthCredential type that was used.
+    const credential = FacebookAuthProvider.credentialFromError(error);
+
+    // ...
+  });
+  
   
   // firebase.auth()
   //     .signInWithPopup(providerFb)
