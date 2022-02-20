@@ -131,6 +131,7 @@ google.addEventListener('click', () => {
 
   sessionStorage.setItem('name', nameG);
   sessionStorage.setItem('status', 'login');
+  sessionStorage.setItem('id', idG);
 
   var userDB = db.collection('user');
   var flag = 0;
@@ -161,9 +162,8 @@ google.addEventListener('click', () => {
       });
     }
 
-    setTimeout(function(){
-      
-    }, 500);
+    window.location = 'update.html';
+    
   }, 500);
 
 });
@@ -198,6 +198,8 @@ fb.addEventListener('click', () => {
       phoneG = "";
 
   sessionStorage.setItem('name', nameG);
+  sessionStorage.setItem('status', 'login');
+  sessionStorage.setItem('id', idG);
 
   var userDB = db.collection('user');
   var flag = 0;
