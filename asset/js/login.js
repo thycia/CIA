@@ -153,7 +153,18 @@ google.addEventListener('click', () => {
               username: "",
               password: ""
             });
-            window.location = 'update.html';
+            Swal.fire({
+              icon: 'success',
+              title: 'OK',
+              text: '請前往填寫基本資料',
+              allowOutsideClick: false,
+              showCancelButton: false,
+            }).then((result) => {
+              if (result.value) {
+                window.location = 'update.html';
+              }
+            })
+            
           }else{
             window.location = 'index.html';
           }
@@ -226,7 +237,17 @@ fb.addEventListener('click', () => {
               username: "",
               password: ""
             });
-            window.location = 'update.html';
+            Swal.fire({
+              icon: 'success',
+              title: 'OK',
+              text: '請前往填寫基本資料',
+              allowOutsideClick: false,
+              showCancelButton: false,
+            }).then((result) => {
+              if (result.value) {
+                window.location = 'update.html';
+              }
+            })
           }else{
             window.location = 'index.html';
           }
@@ -237,6 +258,13 @@ fb.addEventListener('click', () => {
         let errorMessage = error.message;
         let email = error.email;
         let credential = error.credential;
+        Swal.fire({
+          icon: 'warning',
+          title: 'Oops...',
+          text: '此信箱已使用FB登入過',
+          allowOutsideClick: false,
+          showCancelButton: false,
+          })
       });
 
   
