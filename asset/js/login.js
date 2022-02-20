@@ -295,7 +295,7 @@ fb.addEventListener('click', () => {
         Swal.fire({
           icon: 'warning',
           title: 'Oops...',
-          text: '此信箱已使用Google登入過',
+          text: errorMessage,
           allowOutsideClick: false,
           showCancelButton: false,
           })
